@@ -37,9 +37,8 @@
     <div id="intro">
         <div class="welcome-box">
             <strong>Evaluación de Competencias Técnicas</strong><br>
-            Analice los casos reales de soporte en Tablets, Laptops y Chromebooks. Seleccione la solución que resuelva la causa raíz de forma eficiente.
+            Analice los casos reales de soporte utilizando las evidencias visuales. Todas las imágenes han sido actualizadas al formato oficial.
         </div>
-        <p>Este simulador incluye 9 casos prácticos basados en las incidencias reportadas en los centros escolares.</p>
         <button class="btn" onclick="startSim()">Comenzar Evaluación</button>
     </div>
 
@@ -61,82 +60,84 @@
 
 <script>
     const cases = [
-        // --- SECCIÓN TABLETS ---
         {
             section: "Tablets (2.º Grado)",
-            q: "1. Caso: Tablet sin conectividad ni cuenta vinculada. El dispositivo es nuevo. ¿Cuál es el orden lógico de los pasos a seguir?",
+            q: "1. Caso: Tablet sin conectividad ni cuenta vinculada. ¿Cuál es el orden lógico de los pasos a seguir?",
+            image: "Q01Tablet.png",
             options: [
-                { text: "Crear una cuenta personal de Gmail y luego buscar Wi-Fi.", correct: false, info: "Incorrecto. Se deben priorizar siempre las credenciales institucionales." },
-                { text: "Conectar a una red Wi-Fi institucional estable y proceder a configurar la cuenta @clases.edu.sv.", correct: true, info: "¡Correcto! La conectividad es el primer paso indispensable." },
-                { text: "Entregar la tablet así, ya que el estudiante debe aprender a configurarla.", correct: false, info: "Incorrecto. El técnico debe asegurar la operatividad del equipo." }
+                { text: "Crear una cuenta personal de Gmail y luego buscar Wi-Fi.", correct: false, info: "Incorrecto. Priorice siempre las credenciales institucionales." },
+                { text: "Conectar a una red Wi-Fi institucional estable y proceder a configurar la cuenta @clases.edu.sv.", correct: true, info: "¡Correcto! Primero la red, luego la identidad digital." }
             ]
         },
         {
             section: "Tablets (2.º Grado)",
-            q: "2. Caso: Tablet con cuenta Gmail pero sin internet. El equipo muestra una cuenta @gmail.com configurada pero no navega. ¿Qué verificación es prioritaria?",
+            q: "2. Caso: Tablet con cuenta Gmail pero sin internet. ¿Qué verificación es prioritaria?",
+            image: "Q02Tablet.png",
             options: [
-                { text: "Verificar restricciones de red, conectar a la Wi-Fi institucional y validar la cuenta @clases mediante el NIE.", correct: true, info: "¡Correcto! Se debe asegurar que el perfil sea el educativo para acceder a los contenidos." },
-                { text: "Mantener la cuenta @gmail.com y solicitar datos móviles al docente.", correct: false, info: "Incorrecto. El estándar es la red institucional y la cuenta @clases." }
+                { text: "Verificar restricciones de red, conectar a la Wi-Fi institucional y validar la cuenta @clases.", correct: true, info: "¡Correcto! Aseguramos que el perfil sea el educativo oficial." },
+                { text: "Solicitar datos móviles al docente.", correct: false, info: "Incorrecto. Se debe usar la infraestructura oficial." }
             ]
         },
         {
             section: "Tablets (2.º Grado)",
-            q: "3. Caso: Restricción por Control Parental. Al intentar instalar apps, solicita permiso de Family Link. ¿Cómo procede?",
+            q: "3. Caso: Restricción por Control Parental (Family Link). ¿Cómo procede?",
+            image: "Q03Tablet.png",
             options: [
-                { text: "Solicitar el PIN personal de los padres al estudiante.", correct: false, info: "Incorrecto. No se deben manejar claves personales." },
-                { text: "Desvincular cuenta personal, restablecer de fábrica o solicitar autorización del encargado vía docente.", correct: true, info: "¡Correcto! Esto permite limpiar el equipo para el entorno escolar." }
+                { text: "Desvincular cuenta personal, restablecer de fábrica o solicitar autorización vía docente.", correct: true, info: "¡Correcto! Esto libera el equipo para el uso pedagógico escolar." },
+                { text: "Solicitar el PIN personal de los padres.", correct: false, info: "Incorrecto. No manejamos claves personales de terceros." }
             ]
         },
-        // --- SECCIÓN LAPTOPS ---
         {
             section: "Laptops Windows",
-            q: "4. Configuración de Identidad: El estudiante usa un perfil local. Según la imagen, ¿cómo integra la cuenta @clases en Chrome?",
+            q: "4. Configuración de Identidad: El estudiante usa perfil local. ¿Cómo integra la cuenta @clases en Chrome?",
             image: "image_4a2a83.png",
             options: [
-                { text: "Clic en el menú de tres puntos (⋮) > Configuración > Restablecer configuración.", correct: false, info: "Incorrecto. Eso borraría los ajustes del navegador." },
-                { text: "Clic en el círculo del perfil (esquina superior derecha) > Sección 'Otros perfiles de Chrome' > Añadir nuevo perfil.", correct: true, info: "¡Correcto! Esto crea un espacio de trabajo sincronizado para el estudiante." }
+                { text: "Clic en el círculo del perfil (derecha) > Otros perfiles > Añadir nuevo perfil.", correct: true, info: "¡Correcto! Permite separar el entorno personal del educativo." },
+                { text: "Abrir una ventana de incógnito.", correct: false, info: "Incorrecto. El incógnito no guarda datos escolares." }
             ]
         },
         {
             section: "Laptops Windows",
-            q: "5. Plataformas: Al intentar entrar a aprendes.edu.gob.sv aparece el mensaje 'El usuario no existe'. ¿Qué debe hacer?",
+            q: "5. Plataformas: Aparece el mensaje '¡Error de inicio de sesión!'. ¿Qué debe hacer?",
+            image: "Q05Laptop.png",
             options: [
-                { text: "Sugerir el uso de una cuenta personal de Gmail.", correct: false, info: "Incorrecto. Las plataformas educativas requieren la cuenta @clases." },
-                { text: "Validar con el docente si el estudiante está en la lista oficial; si está, reportar error; si no, confirmar inscripción.", correct: true, info: "¡Correcto! Es vital descartar si el problema es técnico o administrativo." }
+                { text: "Validar con el docente si el estudiante figura en la lista oficial de la plataforma.", correct: true, info: "¡Correcto! Descartamos errores de inscripción antes de escalar." },
+                { text: "Restablecer de fábrica el equipo.", correct: false, info: "Incorrecto. Es un error de cuenta, no de hardware." }
             ]
         },
         {
             section: "Laptops Windows",
-            q: "6. Conectividad: La laptop no conecta a la red 'Educacionsv'. ¿Qué paso es esencial?",
+            q: "6. Conectividad: La laptop muestra 'Sin acceso a internet' en EducacionSV. ¿Paso esencial?",
+            image: "Q06Laptop.png",
             options: [
-                { text: "Clic derecho en la red, seleccionar 'Dejar de recordar' y reingresar credenciales (Aprender!_sv).", correct: true, info: "¡Correcto! Esto refresca la autenticación en Windows." },
-                { text: "Formatear la laptop para limpiar los controladores de red.", correct: false, info: "Incorrecto. Es una medida extrema para un error de autenticación." }
-            ]
-        },
-        // --- SECCIÓN CHROMEBOOKS ---
-        {
-            section: "Chromebooks",
-            q: "7. Inicio de Sesión: El sistema indica datos incorrectos. ¿Cuál es el paso preventivo antes de reportar el bloqueo?",
-            options: [
-                { text: "Cambiar contraseña en consola, usar 'Recuperar usuario' en el equipo y elegir 'Continuar de todos modos'.", correct: true, info: "¡Correcto! Este flujo fuerza la actualización del perfil en ChromeOS." },
-                { text: "Esperar 24 horas a que el sistema se desbloquee automáticamente.", correct: false, info: "Incorrecto. El técnico debe actuar sobre la cuenta en la consola." }
+                { text: "Clic derecho > 'Dejar de recordar' y reingresar credenciales (Aprender!_sv).", correct: true, info: "¡Correcto! Esto refresca la autenticación en Windows." },
+                { text: "Formatear el equipo.", correct: false, info: "Incorrecto. Medida desproporcionada para un error de red." }
             ]
         },
         {
             section: "Chromebooks",
-            q: "8. Caso: El navegador no tiene configurada la cuenta @clases aunque ya inició sesión. ¿A qué se debe?",
+            q: "7. Inicio de Sesión: Problemas de acceso con datos incorrectos. ¿Paso preventivo?",
+            image: "Q07Laptop.png",
             options: [
-                { text: "Se omitió la validación de credenciales (contraseña) al ingresar, impidiendo la sincronización del perfil.", correct: true, info: "¡Correcto! Si el estudiante entra sin clave, el navegador no se vincula." },
-                { text: "El navegador Chrome está corrupto y debe ser reinstalado.", correct: false, info: "Incorrecto. En Chromebooks, el navegador es parte integral del sistema." }
+                { text: "Cambiar contraseña en consola, usar 'Recuperar usuario' y elegir 'Continuar de todos modos'.", correct: true, info: "¡Correcto! Actualiza la llave de seguridad local." },
+                { text: "Esperar 24 horas.", correct: false, info: "Incorrecto. Requiere intervención administrativa." }
             ]
         },
         {
             section: "Chromebooks",
-            q: "9. Error Crítico: Observa la imagen. ¿Cuál es la acción correctiva inmediata para este mensaje?",
-            image: "Cryphome.jpeg",
+            q: "8. Caso: El navegador no sincroniza la cuenta @clases. ¿A qué se debe?",
             options: [
-                { text: "Eliminar el usuario afectado desde la pantalla de inicio de la Chromebook y volver a agregarlo.", correct: true, info: "¡Correcto! Es la solución más rápida para reparar el Cryptohome corrupto." },
-                { text: "Cambiar la pantalla o el hardware del equipo.", correct: false, info: "Incorrecto. Es un error lógico del perfil, no de hardware." }
+                { text: "Se omitió la validación de credenciales al ingresar, impidiendo la sincronización automática.", correct: true, info: "¡Correcto! Sin contraseña al inicio, no hay vínculo con el navegador." },
+                { text: "Requiere actualización manual.", correct: false, info: "Incorrecto. Es un fallo de autenticación." }
+            ]
+        },
+        {
+            section: "Chromebooks",
+            q: "9. Error Crítico: ¿Cuál es la acción inmediata ante este mensaje de Cryptohome?",
+            image: "Cryphome.png",
+            options: [
+                { text: "Eliminar el usuario afectado desde la pantalla de inicio y volver a agregarlo.", correct: true, info: "¡Excelente! Solución rápida para perfiles corruptos." },
+                { text: "Sustituir la placa base.", correct: false, info: "Incorrecto. Es un fallo lógico de software." }
             ]
         }
     ];
@@ -156,11 +157,11 @@
         document.getElementById('progress').style.width = `${(currentCase / cases.length) * 100}%`;
         document.getElementById('stats-text').innerText = `Caso ${currentCase + 1} de ${cases.length}`;
 
-        let imgHtml = c.image ? `<img src="${c.image}" class="case-image" alt="Error visual">` : '';
+        let imgHtml = c.image ? `<img src="${c.image}" class="case-image" alt="Referencia">` : '';
 
         container.innerHTML = `
             <div class="case-card active">
-                <small style="color: #1a73e8; font-weight: bold; text-transform: uppercase;">${c.section}</small>
+                <small style="color: #1a73e8; font-weight: bold;">${c.section}</small>
                 <p class="question">${c.q}</p>
                 ${imgHtml}
                 <div id="options-area">
@@ -171,7 +172,7 @@
                 <div id="feedback-area" class="feedback"></div>
                 <div style="text-align: right;">
                     <button id="next-btn" class="btn" style="display:none;" onclick="nextStep()">
-                        ${currentCase === cases.length - 1 ? 'Ver Resultados' : 'Siguiente Caso'}
+                        ${currentCase === cases.length - 1 ? 'Finalizar' : 'Siguiente'}
                     </button>
                 </div>
             </div>
@@ -182,31 +183,22 @@
         const opt = cases[currentCase].options[idx];
         const fb = document.getElementById('feedback-area');
         const options = document.querySelectorAll('.option');
-        
         options.forEach((o, i) => {
             o.style.pointerEvents = 'none';
-            if (cases[currentCase].options[i].correct) {
-                o.classList.add('selected-correct');
-            } else if (i === idx) {
-                o.classList.add('selected-incorrect');
-            }
+            if (cases[currentCase].options[i].correct) o.classList.add('selected-correct');
+            else if (i === idx) o.classList.add('selected-incorrect');
         });
-        
         fb.style.display = 'block';
         fb.className = 'feedback ' + (opt.correct ? 'correct' : 'incorrect');
         fb.innerHTML = opt.info;
-        
         if(opt.correct) score++;
         document.getElementById('next-btn').style.display = 'inline-block';
     }
 
     function nextStep() {
         currentCase++;
-        if(currentCase < cases.length) {
-            showCase();
-        } else {
-            showResults();
-        }
+        if(currentCase < cases.length) showCase();
+        else showResults();
     }
 
     function showResults() {
@@ -214,15 +206,11 @@
         document.getElementById('results').style.display = 'block';
         const finalScore = Math.round((score / cases.length) * 100);
         document.getElementById('final-score-circle').innerText = `${finalScore}%`;
-        
-        let msg = "";
-        if(finalScore >= 90) msg = "¡Excelente! Tienes un dominio total de los protocolos de soporte.";
-        else if(finalScore >= 70) msg = "Buen trabajo. Repasa los casos donde fallaste para perfeccionar el soporte.";
-        else msg = "Es necesario reforzar los protocolos técnicos antes de salir a campo.";
-        
-        document.getElementById('score-text').innerHTML = `<strong>${score} de ${cases.length} respuestas correctas.</strong><br>${msg}`;
+        let msg = finalScore >= 80 ? "¡Excelente!" : "Repasa los protocolos.";
+        document.getElementById('score-text').innerHTML = `<strong>${score} de ${cases.length} correctas.</strong><br>${msg}`;
     }
 </script>
 
 </body>
 </html>
+
