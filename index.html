@@ -37,7 +37,7 @@
     <div id="intro">
         <div class="welcome-box">
             <strong>Evaluación de Competencias Técnicas</strong><br>
-            Analice los casos reales de soporte utilizando las evidencias visuales. Todas las imágenes han sido actualizadas al formato oficial.
+            Analice los casos reales de soporte utilizando las evidencias visuales. Todas las imágenes han sido actualizadas al formato oficial .png.
         </div>
         <button class="btn" onclick="startSim()">Comenzar Evaluación</button>
     </div>
@@ -126,6 +126,7 @@
         {
             section: "Chromebooks",
             q: "8. Caso: El navegador no sincroniza la cuenta @clases. ¿A qué se debe?",
+            image: "",
             options: [
                 { text: "Se omitió la validación de credenciales al ingresar, impidiendo la sincronización automática.", correct: true, info: "¡Correcto! Sin contraseña al inicio, no hay vínculo con el navegador." },
                 { text: "Requiere actualización manual.", correct: false, info: "Incorrecto. Es un fallo de autenticación." }
@@ -206,11 +207,10 @@
         document.getElementById('results').style.display = 'block';
         const finalScore = Math.round((score / cases.length) * 100);
         document.getElementById('final-score-circle').innerText = `${finalScore}%`;
-        let msg = finalScore >= 80 ? "¡Excelente!" : "Repasa los protocolos.";
+        let msg = finalScore >= 80 ? "¡Excelente! Estás listo para el soporte en sede." : "Repasa los protocolos técnicos para mejorar.";
         document.getElementById('score-text').innerHTML = `<strong>${score} de ${cases.length} correctas.</strong><br>${msg}`;
     }
 </script>
 
 </body>
 </html>
-
