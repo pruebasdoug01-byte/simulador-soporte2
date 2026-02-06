@@ -6,21 +6,26 @@
     <title>Simulador de Soporte Técnico Escolar 2026</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #1a73e8; text-align: center; }
+        .container { max-width: 850px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #1a73e8; text-align: center; margin-bottom: 10px; }
         .welcome-box { border-left: 5px solid #1a73e8; padding: 15px; background: #e8f0fe; margin-bottom: 20px; }
         .case-card { display: none; }
         .case-card.active { display: block; animation: fadeIn 0.5s; }
-        .question { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; display: block; }
-        .case-image { width: 100%; max-height: 350px; object-fit: contain; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; background: #fafafa; }
-        .option { display: block; background: #f8f9fa; border: 2px solid #dee2e6; padding: 12px; margin-bottom: 10px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .question { font-weight: bold; font-size: 1.15em; margin-bottom: 15px; display: block; color: #202124; }
+        .case-image { width: 100%; max-height: 380px; object-fit: contain; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; background: #fafafa; }
+        .option { display: block; background: #f8f9fa; border: 2px solid #dee2e6; padding: 14px; margin-bottom: 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; }
         .option:hover { background: #e9ecef; border-color: #1a73e8; }
-        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .option.selected-correct { background: #d4edda; border-color: #28a745; }
+        .option.selected-incorrect { background: #f8d7da; border-color: #dc3545; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; font-weight: 500; }
         .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .incorrect { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .btn { display: inline-block; background: #1a73e8; color: white; padding: 10px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; margin-top: 10px; }
-        .progress-bar { height: 10px; background: #eee; border-radius: 5px; margin-bottom: 20px; }
-        .progress-fill { height: 100%; background: #1a73e8; width: 0%; border-radius: 5px; transition: 0.3s; }
+        .btn { display: inline-block; background: #1a73e8; color: white; padding: 12px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; margin-top: 10px; font-weight: bold; }
+        .btn:hover { background: #1557b0; }
+        .progress-container { margin-bottom: 25px; }
+        .progress-bar { height: 10px; background: #eee; border-radius: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #1a73e8; width: 0%; transition: 0.4s; }
+        .stats { font-size: 0.9em; color: #666; margin-bottom: 5px; text-align: right; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -31,61 +36,109 @@
     
     <div id="intro">
         <div class="welcome-box">
-            <strong>¡Bienvenido, equipo!</strong><br>
-            Este simulador interactivo incluye imágenes reales de los errores reportados en campo para mejorar su capacidad de diagnóstico.
+            <strong>Evaluación de Competencias Técnicas</strong><br>
+            Analice los casos reales de soporte en Tablets, Laptops y Chromebooks. Seleccione la solución que resuelva la causa raíz de forma eficiente.
         </div>
-        <button class="btn" onclick="startSim()">Empezar Simulador</button>
+        <p>Este simulador incluye 9 casos prácticos basados en las incidencias reportadas en los centros escolares.</p>
+        <button class="btn" onclick="startSim()">Comenzar Evaluación</button>
     </div>
 
     <div id="game-area" style="display:none;">
-        <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
+        <div class="progress-container">
+            <div class="stats" id="stats-text">Caso 1 de 9</div>
+            <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
+        </div>
         <div id="case-container"></div>
     </div>
 
     <div id="results" style="display:none; text-align: center;">
-        <h2>Resultado Final</h2>
+        <h2>Resultado del Entrenamiento</h2>
+        <div id="final-score-circle" style="font-size: 3em; font-weight: bold; color: #1a73e8; margin: 20px 0;">0%</div>
         <p id="score-text"></p>
-        <button class="btn" onclick="location.reload()">Reiniciar Entrenamiento</button>
+        <button class="btn" onclick="location.reload()">Reiniciar Simulador</button>
     </div>
 </div>
 
 <script>
     const cases = [
+        // --- SECCIÓN TABLETS ---
         {
             section: "Tablets (2.º Grado)",
-            q: "Caso: Tablet sin conectividad ni cuenta vinculada. ¿Cuál es el orden lógico?",
+            q: "1. Caso: Tablet sin conectividad ni cuenta vinculada. El dispositivo es nuevo. ¿Cuál es el orden lógico de los pasos a seguir?",
             options: [
-                { text: "Crear una cuenta personal de Gmail y luego buscar Wi-Fi.", correct: false, info: "Incorrecto. Se deben priorizar las credenciales institucionales." },
-                { text: "Conectar a una red Wi-Fi institucional estable y configurar la cuenta @clases.edu.sv.", correct: true, info: "¡Correcto! Primero la conectividad, luego la identidad digital." }
+                { text: "Crear una cuenta personal de Gmail y luego buscar Wi-Fi.", correct: false, info: "Incorrecto. Se deben priorizar siempre las credenciales institucionales." },
+                { text: "Conectar a una red Wi-Fi institucional estable y proceder a configurar la cuenta @clases.edu.sv.", correct: true, info: "¡Correcto! La conectividad es el primer paso indispensable." },
+                { text: "Entregar la tablet así, ya que el estudiante debe aprender a configurarla.", correct: false, info: "Incorrecto. El técnico debe asegurar la operatividad del equipo." }
             ]
         },
         {
+            section: "Tablets (2.º Grado)",
+            q: "2. Caso: Tablet con cuenta Gmail pero sin internet. El equipo muestra una cuenta @gmail.com configurada pero no navega. ¿Qué verificación es prioritaria?",
+            options: [
+                { text: "Verificar restricciones de red, conectar a la Wi-Fi institucional y validar la cuenta @clases mediante el NIE.", correct: true, info: "¡Correcto! Se debe asegurar que el perfil sea el educativo para acceder a los contenidos." },
+                { text: "Mantener la cuenta @gmail.com y solicitar datos móviles al docente.", correct: false, info: "Incorrecto. El estándar es la red institucional y la cuenta @clases." }
+            ]
+        },
+        {
+            section: "Tablets (2.º Grado)",
+            q: "3. Caso: Restricción por Control Parental. Al intentar instalar apps, solicita permiso de Family Link. ¿Cómo procede?",
+            options: [
+                { text: "Solicitar el PIN personal de los padres al estudiante.", correct: false, info: "Incorrecto. No se deben manejar claves personales." },
+                { text: "Desvincular cuenta personal, restablecer de fábrica o solicitar autorización del encargado vía docente.", correct: true, info: "¡Correcto! Esto permite limpiar el equipo para el entorno escolar." }
+            ]
+        },
+        // --- SECCIÓN LAPTOPS ---
+        {
             section: "Laptops Windows",
-            q: "Analiza la imagen: El estudiante usa un perfil local. ¿Cómo agrega su cuenta @clases correctamente?",
+            q: "4. Configuración de Identidad: El estudiante usa un perfil local. Según la imagen, ¿cómo integra la cuenta @clases en Chrome?",
             image: "image_4a2a83.png",
             options: [
-                { text: "Clic en el círculo del perfil (esquina superior derecha) > Sección 'Otros perfiles de Chrome' > Añadir nuevo perfil.", correct: true, info: "¡Correcto! Esta es la forma oficial de separar el entorno educativo del personal." },
-                { text: "Abrir una Nueva ventana de incógnito para trabajar temporalmente.", correct: false, info: "Incorrecto. El incógnito no guarda la sincronización de Classroom o Drive." }
+                { text: "Clic en el menú de tres puntos (⋮) > Configuración > Restablecer configuración.", correct: false, info: "Incorrecto. Eso borraría los ajustes del navegador." },
+                { text: "Clic en el círculo del perfil (esquina superior derecha) > Sección 'Otros perfiles de Chrome' > Añadir nuevo perfil.", correct: true, info: "¡Correcto! Esto crea un espacio de trabajo sincronizado para el estudiante." }
             ]
         },
         {
             section: "Laptops Windows",
-            q: "Portal aprendes.edu.gob.sv: Aparece 'El usuario no existe'. ¿Cuál es el procedimiento?",
+            q: "5. Plataformas: Al intentar entrar a aprendes.edu.gob.sv aparece el mensaje 'El usuario no existe'. ¿Qué debe hacer?",
             options: [
-                { text: "Validar con el docente si el estudiante figura en la lista oficial de la plataforma.", correct: true, info: "¡Correcto! Si no aparece en lista, el problema es administrativo (inscripción)." },
-                { text: "Restablecer de fábrica el equipo inmediatamente.", correct: false, info: "No. El error es de la plataforma, no del hardware." }
+                { text: "Sugerir el uso de una cuenta personal de Gmail.", correct: false, info: "Incorrecto. Las plataformas educativas requieren la cuenta @clases." },
+                { text: "Validar con el docente si el estudiante está en la lista oficial; si está, reportar error; si no, confirmar inscripción.", correct: true, info: "¡Correcto! Es vital descartar si el problema es técnico o administrativo." }
+            ]
+        },
+        {
+            section: "Laptops Windows",
+            q: "6. Conectividad: La laptop no conecta a la red 'Educacionsv'. ¿Qué paso es esencial?",
+            options: [
+                { text: "Clic derecho en la red, seleccionar 'Dejar de recordar' y reingresar credenciales (Aprender!_sv).", correct: true, info: "¡Correcto! Esto refresca la autenticación en Windows." },
+                { text: "Formatear la laptop para limpiar los controladores de red.", correct: false, info: "Incorrecto. Es una medida extrema para un error de autenticación." }
+            ]
+        },
+        // --- SECCIÓN CHROMEBOOKS ---
+        {
+            section: "Chromebooks",
+            q: "7. Inicio de Sesión: El sistema indica datos incorrectos. ¿Cuál es el paso preventivo antes de reportar el bloqueo?",
+            options: [
+                { text: "Cambiar contraseña en consola, usar 'Recuperar usuario' en el equipo y elegir 'Continuar de todos modos'.", correct: true, info: "¡Correcto! Este flujo fuerza la actualización del perfil en ChromeOS." },
+                { text: "Esperar 24 horas a que el sistema se desbloquee automáticamente.", correct: false, info: "Incorrecto. El técnico debe actuar sobre la cuenta en la consola." }
             ]
         },
         {
             section: "Chromebooks",
-            q: "Observa el error en pantalla: ¿Cuál es la acción correctiva inmediata para este caso?",
+            q: "8. Caso: El navegador no tiene configurada la cuenta @clases aunque ya inició sesión. ¿A qué se debe?",
+            options: [
+                { text: "Se omitió la validación de credenciales (contraseña) al ingresar, impidiendo la sincronización del perfil.", correct: true, info: "¡Correcto! Si el estudiante entra sin clave, el navegador no se vincula." },
+                { text: "El navegador Chrome está corrupto y debe ser reinstalado.", correct: false, info: "Incorrecto. En Chromebooks, el navegador es parte integral del sistema." }
+            ]
+        },
+        {
+            section: "Chromebooks",
+            q: "9. Error Crítico: Observa la imagen. ¿Cuál es la acción correctiva inmediata para este mensaje?",
             image: "Cryphome.jpeg",
             options: [
-                { text: "Eliminar el usuario afectado desde la pantalla de inicio y volver a agregar la cuenta @clases.", correct: true, info: "¡Excelente! Eliminar el perfil corrupto localmente suele solucionar el error de Cryptohome." },
-                { text: "Realizar un cambio físico de la pantalla del equipo.", correct: false, info: "No. Es un error de encriptación del perfil de usuario, no de hardware." }
+                { text: "Eliminar el usuario afectado desde la pantalla de inicio de la Chromebook y volver a agregarlo.", correct: true, info: "¡Correcto! Es la solución más rápida para reparar el Cryptohome corrupto." },
+                { text: "Cambiar la pantalla o el hardware del equipo.", correct: false, info: "Incorrecto. Es un error lógico del perfil, no de hardware." }
             ]
         }
-        // He resumido los casos para que pruebes las imágenes. Puedes agregar los demás siguiendo este formato.
     ];
 
     let currentCase = 0;
@@ -101,21 +154,26 @@
         const c = cases[currentCase];
         const container = document.getElementById('case-container');
         document.getElementById('progress').style.width = `${(currentCase / cases.length) * 100}%`;
+        document.getElementById('stats-text').innerText = `Caso ${currentCase + 1} de ${cases.length}`;
 
-        let imgHtml = c.image ? `<img src="${c.image}" class="case-image" alt="Referencia de error">` : '';
+        let imgHtml = c.image ? `<img src="${c.image}" class="case-image" alt="Error visual">` : '';
 
         container.innerHTML = `
             <div class="case-card active">
-                <small style="color: #666; text-transform: uppercase;">Sección: ${c.section}</small>
+                <small style="color: #1a73e8; font-weight: bold; text-transform: uppercase;">${c.section}</small>
                 <p class="question">${c.q}</p>
                 ${imgHtml}
                 <div id="options-area">
                     ${c.options.map((opt, i) => `
-                        <div class="option" onclick="checkAnswer(${i})">${opt.text}</div>
+                        <div class="option" id="opt-${i}" onclick="checkAnswer(${i})">${opt.text}</div>
                     `).join('')}
                 </div>
                 <div id="feedback-area" class="feedback"></div>
-                <button id="next-btn" class="btn" style="display:none;" onclick="nextStep()">Siguiente Caso</button>
+                <div style="text-align: right;">
+                    <button id="next-btn" class="btn" style="display:none;" onclick="nextStep()">
+                        ${currentCase === cases.length - 1 ? 'Ver Resultados' : 'Siguiente Caso'}
+                    </button>
+                </div>
             </div>
         `;
     }
@@ -124,10 +182,20 @@
         const opt = cases[currentCase].options[idx];
         const fb = document.getElementById('feedback-area');
         const options = document.querySelectorAll('.option');
-        options.forEach(o => o.style.pointerEvents = 'none');
+        
+        options.forEach((o, i) => {
+            o.style.pointerEvents = 'none';
+            if (cases[currentCase].options[i].correct) {
+                o.classList.add('selected-correct');
+            } else if (i === idx) {
+                o.classList.add('selected-incorrect');
+            }
+        });
+        
         fb.style.display = 'block';
         fb.className = 'feedback ' + (opt.correct ? 'correct' : 'incorrect');
         fb.innerHTML = opt.info;
+        
         if(opt.correct) score++;
         document.getElementById('next-btn').style.display = 'inline-block';
     }
@@ -145,13 +213,16 @@
         document.getElementById('game-area').style.display = 'none';
         document.getElementById('results').style.display = 'block';
         const finalScore = Math.round((score / cases.length) * 100);
-        document.getElementById('score-text').innerHTML = `<strong>Puntuación: ${finalScore}%</strong><br>Entrenamiento completado.`;
+        document.getElementById('final-score-circle').innerText = `${finalScore}%`;
+        
+        let msg = "";
+        if(finalScore >= 90) msg = "¡Excelente! Tienes un dominio total de los protocolos de soporte.";
+        else if(finalScore >= 70) msg = "Buen trabajo. Repasa los casos donde fallaste para perfeccionar el soporte.";
+        else msg = "Es necesario reforzar los protocolos técnicos antes de salir a campo.";
+        
+        document.getElementById('score-text').innerHTML = `<strong>${score} de ${cases.length} respuestas correctas.</strong><br>${msg}`;
     }
 </script>
 
 </body>
 </html>
-
-</body>
-</html>
-
