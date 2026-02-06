@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Soporte Técnico Escolar 2026</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #1a73e8; text-align: center; }
+        .welcome-box { border-left: 5px solid #1a73e8; padding: 15px; background: #e8f0fe; margin-bottom: 20px; }
+        .case-card { display: none; }
+        .case-card.active { display: block; animation: fadeIn 0.5s; }
+        .question { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; display: block; }
+        .option { display: block; background: #f8f9fa; border: 2px solid #dee2e6; padding: 12px; margin-bottom: 10px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .option:hover { background: #e9ecef; border-color: #1a73e8; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .incorrect { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .btn { display: inline-block; background: #1a73e8; color: white; padding: 10px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; margin-top: 10px; }
+        .btn:disabled { background: #ccc; }
+        .progress-bar { height: 10px; background: #eee; border-radius: 5px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: #1a73e8; width: 0%; border-radius: 5px; transition: 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Simulador de Soporte Técnico 2026</h1>
+    
+    <div id="intro">
+        <div class="welcome-box">
+            <strong>¡Bienvenido, equipo!</strong><br>
+            Este simulador fortalecerá sus capacidades de respuesta ante incidencias reales en centros escolares. Su objetivo es garantizar que la tecnología sea una herramienta fluida para el aprendizaje. [cite: 31, 32]
+        </div>
+        <p><strong>Instrucciones:</strong> Analice cada caso y seleccione la solución técnica que resuelva la causa raíz de forma eficiente. </p>
+        <button class="btn" onclick="startSim()">Empezar Simulador</button>
+    </div>
+
+    <div id="game-area" style="display:none;">
+        <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
+        <div id="case-container"></div>
+    </div>
+
+    <div id="results" style="display:none; text-align: center;">
+        <h2>Resultado Final</h2>
+        <p id="score-text"></p>
+        <button class="btn" onclick="location.reload()">Reiniciar</button>
+    </div>
+</div>
+
+<script>
+    const cases = [
+        {
+            section: "Tablets (2.º Grado)",
+            q: "Caso: Tablet sin conectividad ni cuenta vinculada. Un estudiante recibe una tablet nueva sin internet ni cuenta. ¿Cuál es el orden lógico?",
+            options: [
+                { text: "Crear una cuenta personal de Gmail y luego buscar Wi-Fi.", correct: false, info: "Incorrecto. Se deben priorizar las credenciales institucionales." },
+                { text: "Conectar a una red Wi-Fi institucional estable y configurar la cuenta @clases.edu.sv.", correct: true, info: "¡Correcto! Primero la conectividad, luego la identidad digital." }
+            ]
+        },
+        {
+            section: "Tablets (2.º Grado)",
+            q: "Caso: Tablet con @gmail.com pero no navega. ¿Qué verificación es prioritaria?",
+            options: [
+                { text: "Verificar restricciones de red, conectar a Wi-Fi institucional y validar cuenta @clases vía NIE.", correct: true, info: "¡Excelente! Siempre hay que asegurar que la cuenta sea la educativa." },
+                { text: "Restablecer de fábrica inmediatamente sin comprobar la conexión.", correct: false, info: "No. El formateo es el último recurso." }
+            ]
+        },
+        {
+            section: "Tablets (2.º Grado)",
+            q: "Caso: Restricción por Control Parental (Family Link). ¿Cómo procedería?",
+            options: [
+                { text: "Desvincular cuenta personal, restablecer de fábrica o solicitar autorización del encargado vía docente.", correct: true, info: "¡Correcto! Esto libera el equipo para uso pedagógico." },
+                { text: "Indicar que el dispositivo no puede usarse para fines educativos.", correct: false, info: "Incorrecto. El técnico debe buscar soluciones." }
+            ]
+        },
+        {
+            section: "Laptops Windows",
+            q: "Configuración de Identidad: El estudiante usa perfil local sin @clases. ¿Cómo lo agrega en Chrome?",
+            options: [
+                { text: "Clic en el círculo del perfil (derecha) > Otros perfiles > Añadir nuevo perfil.", correct: true, info: "¡Correcto! Esto mantiene la sincronización separada y segura." },
+                { text: "Abrir una ventana de incógnito temporal.", correct: false, info: "No. El incógnito no guarda el progreso del estudiante." }
+            ]
+        },
+        {
+            section: "Laptops Windows",
+            q: "Plataformas: Aparece 'Usuario no existe' en aprendes.edu.gob.sv. ¿Qué hace primero?",
+            options: [
+                { text: "Validar con el docente si el estudiante está en la lista oficial.", correct: true, info: "¡Correcto! Es un paso administrativo necesario antes de escalar a nivel técnico." },
+                { text: "Reportar a soporte central de inmediato.", correct: false, info: "No. Primero debe descartar si el estudiante está inscrito." }
+            ]
+        },
+        {
+            section: "Laptops Windows",
+            q: "Wi-Fi: La laptop no conecta a 'Educacionsv'. ¿Paso esencial?",
+            options: [
+                { text: "Clic derecho > 'Dejar de recordar' y reingresar credenciales (Aprender!_sv).", correct: true, info: "¡Correcto! Esto refresca la autenticación en el sistema." },
+                { text: "Desactivar la tarjeta de red desde la BIOS.", correct: false, info: "Extremo e innecesario." }
+            ]
+        },
+        {
+            section: "Chromebooks",
+            q: "Inicio de Sesión: Datos incorrectos en pantalla de inicio. ¿Paso preventivo?",
+            options: [
+                { text: "Cambiar clave en consola > 'Recuperar usuario' > 'Continuar de todos modos'.", correct: true, info: "¡Correcto! Esto fuerza la actualización de la llave de seguridad." },
+                { text: "Esperar 24 horas a que se desbloquee solo.", correct: false, info: "Incorrecto. El soporte debe ser proactivo." }
+            ]
+        },
+        {
+            section: "Chromebooks",
+            q: "El navegador no tiene la cuenta @clases. ¿Solución y razón?",
+            options: [
+                { text: "Reconfigurar ingreso completo; el error es por omitir la contraseña al acceder.", correct: true, info: "¡Correcto! Si no hay validación inicial, el navegador no sincroniza." },
+                { text: "Reinstalar Chrome desde la tienda de aplicaciones.", correct: false, info: "No aplica en ChromeOS." }
+            ]
+        },
+        {
+            section: "Chromebooks",
+            q: "Error 'Cryptohome is corrupted'. ¿Acción inmediata?",
+            options: [
+                { text: "Eliminar el usuario afectado desde la pantalla de inicio y volverlo a agregar.", correct: true, info: "¡Correcto! Es la solución más rápida antes de un Powerwash." },
+                { text: "Cambiar la pantalla o hardware del equipo.", correct: false, info: "Incorrecto. Es un error de software/perfil." }
+            ]
+        }
+    ];
+
+    let currentCase = 0;
+    let score = 0;
+
+    function startSim() {
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('game-area').style.display = 'block';
+        showCase();
+    }
+
+    function showCase() {
+        const c = cases[currentCase];
+        const container = document.getElementById('case-container');
+        document.getElementById('progress').style.width = `${(currentCase / cases.length) * 100}%`;
+
+        container.innerHTML = `
+            <div class="case-card active">
+                <small style="color: #666; text-transform: uppercase;">Sección: ${c.section}</small>
+                <p class="question">${c.q}</p>
+                <div id="options-area">
+                    ${c.options.map((opt, i) => `
+                        <div class="option" onclick="checkAnswer(${i})">${opt.text}</div>
+                    `).join('')}
+                </div>
+                <div id="feedback-area" class="feedback"></div>
+                <button id="next-btn" class="btn" style="display:none;" onclick="nextStep()">Siguiente Caso</button>
+            </div>
+        `;
+    }
+
+    function checkAnswer(idx) {
+        const opt = cases[currentCase].options[idx];
+        const fb = document.getElementById('feedback-area');
+        const options = document.querySelectorAll('.option');
+        
+        options.forEach(o => o.style.pointerEvents = 'none');
+        
+        fb.style.display = 'block';
+        fb.className = 'feedback ' + (opt.correct ? 'correct' : 'incorrect');
+        fb.innerHTML = opt.info;
+        
+        if(opt.correct) score++;
+        
+        document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextStep() {
+        currentCase++;
+        if(currentCase < cases.length) {
+            showCase();
+        } else {
+            showResults();
+        }
+    }
+
+    function showResults() {
+        document.getElementById('game-area').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        const finalScore = Math.round((score / cases.length) * 100);
+        document.getElementById('score-text').innerHTML = `Has completado el entrenamiento.<br><strong>Puntuación: ${finalScore}%</strong><br>(${score} de ${cases.length} casos resueltos correctamente).`;
+    }
+</script>
+
+</body>
+</html>
