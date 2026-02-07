@@ -9,6 +9,9 @@
         .container { max-width: 850px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h1 { color: #1a73e8; text-align: center; margin-bottom: 10px; }
         .welcome-box { border-left: 5px solid #1a73e8; padding: 15px; background: #e8f0fe; margin-bottom: 20px; }
+        .user-select-box { margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6; }
+        label { font-weight: bold; display: block; margin-bottom: 8px; }
+        select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em; }
         .case-card { display: none; }
         .case-card.active { display: block; animation: fadeIn 0.5s; }
         .question { font-weight: bold; font-size: 1.15em; margin-bottom: 15px; display: block; color: #202124; }
@@ -21,11 +24,8 @@
         .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .incorrect { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         .btn { display: inline-block; background: #1a73e8; color: white; padding: 12px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; margin-top: 10px; font-weight: bold; }
-        .btn:hover { background: #1557b0; }
-        .progress-container { margin-bottom: 25px; }
-        .progress-bar { height: 10px; background: #eee; border-radius: 5px; overflow: hidden; }
+        .progress-bar { height: 10px; background: #eee; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
         .progress-fill { height: 100%; background: #1a73e8; width: 0%; transition: 0.4s; }
-        .stats { font-size: 0.9em; color: #666; margin-bottom: 5px; text-align: right; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -37,116 +37,88 @@
     <div id="intro">
         <div class="welcome-box">
             <strong>Evaluación de Competencias Técnicas</strong><br>
-            Analice los casos reales de soporte utilizando las evidencias visuales proporcionadas. Todas las imágenes deben estar en formato .png.
+            Analice los casos reales de soporte utilizando las evidencias visuales proporcionadas.
         </div>
+        
+        <div class="user-select-box">
+            <label for="userName">Nombre del Facilitador:</label>
+            <select id="userName">
+                <option value="">-- Seleccione su nombre --</option>
+                <option>ADMIN</option><option>ADI ARANA GARCIA</option><option>ALEJANDRA MICHELLE AYALA GARCÍA</option>
+                <option>ALLISON CAROLINA ORELLANA RIVAS</option><option>ALMA GUADALUPE POLANCO DE QUIJANO</option>
+                <option>ANA LUCÍA TRINIDAD GÓMEZ</option><option>ANA MARIA GOMEZ CORCIOS</option>
+                <option>ANA MARITZA MIRANDA MEJIA</option><option>ANDREA MARIA HERNANDEZ CRUZ</option>
+                <option>BLANCA ISABEL RIVAS CANIZALES</option><option>CARINA YAMILET LUE DE MONTES</option>
+                <option>CARLOS ENRIQUE ORTIZ TREJO</option><option>CINDY ARACELY BONILLA DE ACOSTA</option>
+                <option>CLAUDIA MARIA CAMPOS DE CASTILLO</option><option>CLAUDIA PATRICIA GARCÍA TREJO</option>
+                <option>DIANA BEATRIZ VENTURA BARAHONA</option><option>DIANA CAROLINA GARCIA DELGADO</option>
+                <option>DIANA PATRICIA OSORIO MÉNDEZ</option><option>ERIKA CAROLINA CALVO CULIE</option>
+                <option>ESTER NOHEMÍ AGUIÑADA OLIVA</option><option>FERNANDO JOSE REYES VELASQUEZ</option>
+                <option>GABRIEL ISAIAS VASQUEZ GUTIERREZ</option><option>GABRIELA ELIZABETH ROMERO LÓPEZ</option>
+                <option>GERALDINA ISABEL RIVERA ESPINOZA</option><option>GLADIS AMINTA GALDAMEZ MERINO</option>
+                <option>GLENDA REBECA PORTILLO GOMEZ</option><option>GLORIA DAYANA ALVAREZ DE MORALES</option>
+                <option>GRISELDA MARILIN RODRIGUEZ ALVARADO</option><option>HUBER DANIEL RAMIREZ</option>
+                <option>INGRID VANNESSA CASTILLO NAVARRO</option><option>ISMAEL ALFREDO LOPEZ RODRIGUEZ</option>
+                <option>JAVIER ERNESTO RIVAS MURCIA</option><option>KAREN LISSETH RIVAS ESCAMILLA</option>
+                <option>KAREN VANESSA BENÍTEZ MARTÍNEZ</option><option>KARLA LISSBETH FLORES VÀSQUEZ</option>
+                <option>KARLA NOEMY RECINOS GIRÓN</option><option>KENELMA KIMBERLY GALINDO LÓPEZ</option>
+                <option>KENNYA ALEJANDRA RODRÍGUEZ CERÓN</option><option>KEVIN MAURICIO CAZÚN</option>
+                <option>LISSETTE CONSUELO REYES GRANDE</option><option>LUIS ALFREDO TORRES ESCALANTE</option>
+                <option>MARCELO JOSÉ MENDOZA HERNÁNDEZ</option><option>MARÍA JOSÉ SANDOVAL TORRES</option>
+                <option>MARÍA XIOMARA JUÁREZ DE MARAVILLA</option><option>MARINA ANDREA CISNEROS MARTÍNEZ</option>
+                <option>MAYRA ALEJANDRA NAVARRO MARTÍNEZ</option><option>MAYRA LISETH CHACÓN RUANO</option>
+                <option>NOE EDGARDO BARRERA JIMENEZ</option><option>PATRICIA MARISOL QUINTEROS ARÉVALO</option>
+                <option>RITA ANGELICA AGUIRRE POLANCO</option><option>RODRIGO ALBERTO GUZMAN GONZALEZ</option>
+                <option>ROSIBEL CAROLINA CORTEZ PREZA</option><option>SANDRA ELIZABETH CERNA COTO</option>
+                <option>SARA AGUILERA</option><option>SILVIA LISSETTE RODRÍGUEZ</option>
+                <option>SKARLETH NOHEMY GUEVARA DE RODRIGUEZ</option><option>SONIA SARAI LOPEZ GUIDOS</option>
+                <option>STEPHANIE ESMERALDA RIVERA CIENFUEGOS</option><option>WENDY MARGARITA GARCÍA CHICAS</option>
+                <option>WILLIAN OSWALDO DIEGO MARTINEZ</option><option>XIOMARA VANESSA FLORES</option>
+                <option>YENSY ELIZABETH HERNÁNDEZ DECENA</option><option>YESENIA ABIGAIL SOLIS DE LUNA</option>
+                <option>YESENIA ELIZABETH ZAVALA DE ARAUZ</option><option>EMELY NICOLE RAMIREZ MENDOZA</option>
+                <option>NATALIA SOFIA ARGUETA MENDEZ</option>
+            </select>
+        </div>
+        
         <button class="btn" onclick="startSim()">Comenzar Evaluación</button>
     </div>
 
     <div id="game-area" style="display:none;">
-        <div class="progress-container">
-            <div class="stats" id="stats-text">Caso 1 de 9</div>
-            <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
-        </div>
+        <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
         <div id="case-container"></div>
     </div>
 
     <div id="results" style="display:none; text-align: center;">
-        <h2>Resultado del Entrenamiento</h2>
+        <h2 id="result-title">Resultado del Entrenamiento</h2>
         <div id="final-score-circle" style="font-size: 3em; font-weight: bold; color: #1a73e8; margin: 20px 0;">0%</div>
         <p id="score-text"></p>
-        <button class="btn" onclick="location.reload()">Reiniciar Simulador</button>
+        <button class="btn" onclick="location.reload()">Reiniciar</button>
     </div>
 </div>
 
 <script>
     const cases = [
-        {
-            section: "Tablets (2.º Grado)",
-            q: "1. Caso: Tablet sin conectividad ni cuenta vinculada. ¿Cuál es el orden lógico de los pasos a seguir?",
-            image: "Q01Tablet.png",
-            options: [
-                { text: "Crear una cuenta personal de Gmail y luego buscar Wi-Fi.", correct: false, info: "Incorrecto. Priorice siempre las credenciales institucionales." },
-                { text: "Conectar a una red Wi-Fi institucional estable y proceder a configurar la cuenta @clases.edu.sv.", correct: true, info: "¡Correcto! Primero garantizamos la red para luego gestionar la identidad digital." }
-            ]
-        },
-        {
-            section: "Tablets (2.º Grado)",
-            q: "2. Caso: Tablet con cuenta Gmail pero sin internet. ¿Qué verificación es prioritaria?",
-            image: "Q02Tablet.png",
-            options: [
-                { text: "Verificar restricciones de red, conectar a la Wi-Fi institucional y validar la cuenta @clases.", correct: true, info: "¡Correcto! Es vital asegurar que el perfil navegue bajo la cuenta educativa oficial." },
-                { text: "Solicitar datos móviles al docente.", correct: false, info: "Incorrecto. Se debe utilizar la infraestructura del proyecto escolar." }
-            ]
-        },
-        {
-            section: "Tablets (2.º Grado)",
-            q: "3. Caso: Restricción por Control Parental (Family Link). ¿Cómo procede?",
-            image: "Q03Tablet.png",
-            options: [
-                { text: "Desvincular cuenta personal, restablecer de fábrica o solicitar autorización vía docente.", correct: true, info: "¡Correcto! Esto permite limpiar el equipo para el uso pedagógico oficial." },
-                { text: "Solicitar el PIN personal de los padres.", correct: false, info: "Incorrecto. No debemos gestionar claves personales de terceros." }
-            ]
-        },
-        {
-            section: "Laptops Windows",
-            q: "4. Configuración de Identidad: El estudiante usa perfil local. ¿Cómo integra la cuenta @clases en Chrome?",
-            image: "image_4a2a83.png",
-            options: [
-                { text: "Clic en el círculo del perfil (derecha) > Otros perfiles > Añadir nuevo perfil.", correct: true, info: "¡Correcto! Es la forma técnica de separar el entorno personal del educativo." },
-                { text: "Abrir una ventana de incógnito.", correct: false, info: "Incorrecto. El incógnito no permite la sincronización de datos." }
-            ]
-        },
-        {
-            section: "Laptops Windows",
-            q: "5. Plataformas: Aparece el mensaje '¡Error de inicio de sesión!' en el portal. ¿Qué debe hacer?",
-            image: "Q05Laptop.png",
-            options: [
-                { text: "Validar con el docente si el estudiante figura en la lista oficial de la plataforma.", correct: true, info: "¡Correcto! Descartamos errores de inscripción antes de escalar a nivel técnico." },
-                { text: "Restablecer de fábrica el equipo.", correct: false, info: "Incorrecto. El fallo reside en la validación del usuario en plataforma." }
-            ]
-        },
-        {
-            section: "Laptops Windows",
-            q: "6. Conectividad: La laptop muestra 'Sin acceso a internet' en la red institucional. ¿Paso esencial?",
-            image: "Q06Laptop.png",
-            options: [
-                { text: "Clic derecho > 'Dejar de recordar' y reingresar credenciales (Aprender!_sv).", correct: true, info: "¡Correcto! Refresca la autenticación con los certificados de la red." },
-                { text: "Formatear el equipo.", correct: false, info: "Incorrecto. Es una medida excesiva para un error de autenticación." }
-            ]
-        },
-        {
-            section: "Chromebooks",
-            q: "7. Inicio de Sesión: Problemas de acceso con datos incorrectos. ¿Cuál es el paso preventivo?",
-            image: "Q07Laptop.png",
-            options: [
-                { text: "Cambiar contraseña en consola, usar 'Recuperar usuario' y elegir 'Continuar de todos modos'.", correct: true, info: "¡Correcto! Este flujo actualiza la llave de seguridad local." },
-                { text: "Esperar 24 horas a que se desbloquee.", correct: false, info: "Incorrecto. El técnico debe intervenir mediante la consola." }
-            ]
-        },
-        {
-            section: "Chromebooks",
-            q: "8. Caso: Sesión iniciada sin cuenta en el navegador. El estudiante logra ingresar a la interfaz de la Chromebook, pero al abrir Chrome, nota que su cuenta @clases no está sincronizada. ¿Cuál es la solución?",
-            image: "Q08Laptop.png",
-            options: [
-                { text: "Se debe configurar nuevamente la cuenta @clases realizando el ingreso completo desde la pantalla de inicio. El error ocurre por omitir la validación de credenciales inicial.", correct: true, info: "¡Correcto! Sin contraseña al arranque, el navegador no sincroniza el perfil automáticamente." },
-                { text: "Sugerir el uso de una cuenta @gmail personal en el navegador.", correct: false, info: "Incorrecto. Siempre se debe priorizar la cuenta institucional @clases." }
-            ]
-        },
-        {
-            section: "Chromebooks",
-            q: "9. Error Crítico: ¿Cuál es la acción inmediata ante el mensaje de Cryptohome corrupto?",
-            image: "Cryphome.jpeg",
-            options: [
-                { text: "Eliminar el usuario afectado desde la pantalla de inicio y volver a agregarlo.", correct: true, info: "¡Excelente! Esta acción repara la carpeta de usuario dañada de forma rápida." },
-                { text: "Cambiar la pantalla física del equipo.", correct: false, info: "Incorrecto. Es un error lógico del perfil de usuario." }
-            ]
-        }
+        { section: "Tablets", q: "1. Caso: Tablet sin conectividad ni cuenta vinculada.", image: "Q01Tablet.png", options: [{ text: "Conectar a una red Wi-Fi institucional estable y configurar la cuenta @clases.edu.sv.", correct: true, info: "¡Correcto!" }, { text: "Crear cuenta personal.", correct: false, info: "Incorrecto." }] },
+        { section: "Tablets", q: "2. Caso: Tablet con cuenta Gmail pero sin internet.", image: "Q02Tablet.png", options: [{ text: "Verificar restricciones de red, conectar a la Wi-Fi institucional y validar la cuenta @clases.", correct: true, info: "¡Correcto!" }, { text: "Usar datos móviles.", correct: false, info: "Incorrecto." }] },
+        { section: "Tablets", q: "3. Caso: Restricción por Control Parental (Family Link).", image: "Q03Tablet.png", options: [{ text: "Desvincular cuenta personal o restablecer de fábrica.", correct: true, info: "¡Correcto!" }, { text: "Pedir PIN a los padres.", correct: false, info: "Incorrecto." }] },
+        { section: "Laptops", q: "4. Configuración de Identidad: Estudiante usa perfil local.", image: "image_4a2a83.png", options: [{ text: "Clic en perfil > Otros perfiles > Añadir nuevo perfil.", correct: true, info: "¡Correcto!" }, { text: "Usar incógnito.", correct: false, info: "Incorrecto." }] },
+        { section: "Laptops", q: "5. Plataformas: Error de inicio de sesión.", image: "Q05Laptop.png", options: [{ text: "Validar con el docente si el estudiante figura en la lista oficial.", correct: true, info: "¡Correcto!" }, { text: "Formatear equipo.", correct: false, info: "Incorrecto." }] },
+        { section: "Laptops", q: "6. Conectividad: Sin acceso a internet en EducacionSV.", image: "Q06Laptop.png", options: [{ text: "Dejar de recordar red y reingresar credenciales.", correct: true, info: "¡Correcto!" }, { text: "Reportar AP dañado.", correct: false, info: "Incorrecto." }] },
+        { section: "Chromebooks", q: "7. Inicio de Sesión: Datos incorrectos.", image: "Q07Laptop.png", options: [{ text: "Cambiar contraseña en consola y usar 'Recuperar usuario'.", correct: true, info: "¡Correcto!" }, { text: "Esperar 24h.", correct: false, info: "Incorrecto." }] },
+        { section: "Chromebooks", q: "8. Caso: Sesión iniciada sin cuenta en el navegador.", image: "image_529893.png", options: [{ text: "Configurar nuevamente la cuenta realizando el ingreso completo; el error es por omitir contraseña inicial.", correct: true, info: "¡Correcto!" }, { text: "Usar cuenta @gmail.", correct: false, info: "Incorrecto." }] },
+        { section: "Chromebooks", q: "9. Error Crítico: Cryptohome corrupto.", image: "Cryphome.png", options: [{ text: "Eliminar el usuario afectado y volver a agregarlo.", correct: true, info: "¡Excelente!" }, { text: "Cambiar pantalla.", correct: false, info: "Incorrecto." }] }
     ];
 
     let currentCase = 0;
     let score = 0;
+    let selectedName = "";
 
     function startSim() {
+        selectedName = document.getElementById('userName').value;
+        if (!selectedName) {
+            alert("Por favor, seleccione su nombre antes de comenzar.");
+            return;
+        }
         document.getElementById('intro').style.display = 'none';
         document.getElementById('game-area').style.display = 'block';
         showCase();
@@ -156,35 +128,22 @@
         const c = cases[currentCase];
         const container = document.getElementById('case-container');
         document.getElementById('progress').style.width = `${(currentCase / cases.length) * 100}%`;
-        document.getElementById('stats-text').innerText = `Caso ${currentCase + 1} de ${cases.length}`;
-
-        let imgHtml = c.image ? `<img src="${c.image}" class="case-image" alt="Referencia visual">` : '';
-
+        let imgHtml = c.image ? `<img src="${c.image}" class="case-image">` : '';
         container.innerHTML = `
             <div class="case-card active">
-                <small style="color: #1a73e8; font-weight: bold; text-transform: uppercase;">${c.section}</small>
+                <small style="color:#1a73e8; font-weight:bold;">${c.section}</small>
                 <p class="question">${c.q}</p>
                 ${imgHtml}
-                <div id="options-area">
-                    ${c.options.map((opt, i) => `
-                        <div class="option" id="opt-${i}" onclick="checkAnswer(${i})">${opt.text}</div>
-                    `).join('')}
-                </div>
+                <div id="options-area">${c.options.map((opt, i) => `<div class="option" onclick="checkAnswer(${i})">${opt.text}</div>`).join('')}</div>
                 <div id="feedback-area" class="feedback"></div>
-                <div style="text-align: right;">
-                    <button id="next-btn" class="btn" style="display:none;" onclick="nextStep()">
-                        ${currentCase === cases.length - 1 ? 'Finalizar' : 'Siguiente'}
-                    </button>
-                </div>
-            </div>
-        `;
+                <div style="text-align:right;"><button id="next-btn" class="btn" style="display:none;" onclick="nextStep()">${currentCase === cases.length - 1 ? 'Finalizar' : 'Siguiente'}</button></div>
+            </div>`;
     }
 
     function checkAnswer(idx) {
         const opt = cases[currentCase].options[idx];
         const fb = document.getElementById('feedback-area');
-        const options = document.querySelectorAll('.option');
-        options.forEach((o, i) => {
+        document.querySelectorAll('.option').forEach((o, i) => {
             o.style.pointerEvents = 'none';
             if (cases[currentCase].options[i].correct) o.classList.add('selected-correct');
             else if (i === idx) o.classList.add('selected-incorrect');
@@ -206,12 +165,11 @@
         document.getElementById('game-area').style.display = 'none';
         document.getElementById('results').style.display = 'block';
         const finalScore = Math.round((score / cases.length) * 100);
+        document.getElementById('result-title').innerText = `¡Buen trabajo, ${selectedName}!`;
         document.getElementById('final-score-circle').innerText = `${finalScore}%`;
-        let msg = finalScore >= 80 ? "¡Excelente! Dominas los protocolos técnicos de la sede." : "Se recomienda revisar los manuales de procedimientos técnicos.";
-        document.getElementById('score-text').innerHTML = `<strong>${score} de ${cases.length} correctas.</strong><br>${msg}`;
+        document.getElementById('score-text').innerHTML = `Has respondido correctamente ${score} de ${cases.length} casos.`;
     }
 </script>
-
 </body>
 </html>
 
